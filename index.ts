@@ -2,9 +2,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const fs = require('fs');
 const path = require('path');
+const grafbase = require('@tomhoule/grafbase-library-engine-experiment');
 
-// Import your `handle` function
-// const { handle } = require('./path-to-your-handle-function');
+const config = fs.readFileSync('./registry.json', 'utf8')
+const engine = new grafbase.GrafbaseGateway(config)
+
 
 const app = express();
 
@@ -13,7 +15,7 @@ app.use(bodyParser.json());
 
 app.get('/', async (req, res) => {
     try {
-      res.sendFile(path.join(__dirname, '/index.html'));
+        res.sendFile(path.join(__dirname, '/index.html'));
     } catch (error) {
         res.status(500).send(error.message);
     }
@@ -21,10 +23,11 @@ app.get('/', async (req, res) => {
 
 app.post('/graphql', async (req, res) => {
     try {
-        // const result = await handle(req.body);
-        const result = { "a": "b" };
-        res.json(result);
+        console.log(req.body)
+        const result = await engine.execute(JSON.stringify(req.body));
+        res.json(JSON.parse(result));
     } catch (error) {
+        console.log(error)
         res.status(500).send(error.message);
     }
 });

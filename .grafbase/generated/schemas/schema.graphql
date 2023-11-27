@@ -1,0 +1,11 @@
+extend schema
+  @graphql(
+    name: "swapi"
+    namespace: true
+    url: "https://swapi-graphql.netlify.app/.netlify/functions/index"
+  )
+  @openapi(
+    name: "stripe"
+    namespace: true
+    schema: "https://raw.githubusercontent.com/stripe/openapi/master/openapi/spec3.json"
+  )
