@@ -5,12 +5,18 @@ const path = require('path');
 const grafbase = require('@tomhoule/grafbase-library-engine-experiment');
 
 const config = fs.readFileSync('./config.json', 'utf8')
-const engine = new grafbase.GrafbaseGateway(config)
 
+// // See README for instructions on using the postgres connector.
+// const postgresConnector = require('./pg.ts')
+
+const engine = new grafbase.GrafbaseGateway(
+    config,
+    // // See README for instructions on using the postgres connector.
+    // postgresConnector.callbacks
+)
 
 const app = express();
 
-// Use bodyParser to parse JSON request bodies
 app.use(bodyParser.json());
 
 app.get('/', async (req, res) => {
