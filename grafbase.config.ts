@@ -6,8 +6,8 @@ import { g, config, connector } from '@grafbase/sdk'
 
 // Data Sources - https://grafbase.com/docs/connectors
 
-// const pg = connector.Postgres('pg', { url: g.env('POSTGRES_URL') })
-// g.datasource(pg)
+const pg = connector.Postgres('pg', { url: g.env('POSTGRES_URL') })
+g.datasource(pg)
 
 const gql = connector.GraphQL('swapi', { url: 'https://swapi-graphql.netlify.app/.netlify/functions/index' })
 g.datasource(gql)

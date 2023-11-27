@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const grafbase = require('@tomhoule/grafbase-library-engine-experiment');
 
-const config = fs.readFileSync('./registry.json', 'utf8')
+const config = fs.readFileSync('./config.json', 'utf8')
 const engine = new grafbase.GrafbaseGateway(config)
 
 

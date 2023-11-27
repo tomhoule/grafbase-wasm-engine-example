@@ -36,7 +36,7 @@ Now let's add a postgres database to the api through the postgres connector:
   psql $POSTGRES_URL
 
   CREATE TABLE testdata (
-    id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     text_content TEXT NOT NULL
   );
 
@@ -45,5 +45,10 @@ Now let's add a postgres database to the api through the postgres connector:
     ('Quiero respirar tu cuello despacito'),
     ('Deja que te diga cosas al oído'),
     ('Para que te acuerdes si no estás conmigo'),
-    ('Despacito')
+    ('Despacito');
   ```
+
+- Now uncomment the postgres connector definition in grafbase.config.ts and run `npx -y grafbase@0.45.5 dump-config > config.json`. The `POSTGRES_URL` environment variable has to be defined and point to the database that was just populated in the previous step, so grafbase can read the database schema.
+
+- Uncomment the three lines about postgres in `index.ts` and restart the dev server.
+- Voilà, you should be able to interact with the postgres database you just populated in the GraphiQL instance at localhost:4000.
